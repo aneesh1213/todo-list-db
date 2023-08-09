@@ -1,0 +1,32 @@
+<%- include("header") -%>
+
+  <div class="box" id="heading">
+    <h1> <%= listTitle %> </h1>
+  </div>
+
+  <div class="box">
+
+  <%  newListItems.forEach(function(item){ %>
+
+    <!-- here if we want to add something or delete something to the home page then we'll create a form -->
+    <form action="/delete" method="post">
+      <div class="item">
+        <!-- after checking this checkbox this will perform like a submit for check/uncheck -->
+        <input type="checkbox" name="checkbox" value="<%=item._id%>" onchange="this.form.submit()">
+        <p><%=  item.name  %></p>
+      </div>
+      <!-- here to delete from every custom list,we will take new input of type hidden -->
+      <input type="text">
+      <input type="hidden" name="listName" value="<%= listTitle %>"></input>
+    </form>
+      
+<%    }) %>
+      
+
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+        <button type="submit" name="list" value="<%= listTitle %>">+</button>
+      </form>
+  </div>
+
+<%- include("footer") -%>
